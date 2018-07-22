@@ -66,7 +66,8 @@ class GameVC: UIViewController {
     var highScore = Int()
     override func viewDidLoad() {
         super.viewDidLoad()
-        score = 0 
+        
+        score = 0
         let highScoreDefault = UserDefaults.standard
         if highScoreDefault.value(forKey: "highScore") != nil {
             highScore = highScoreDefault.value(forKey: "highScore") as! NSInteger
@@ -75,6 +76,7 @@ class GameVC: UIViewController {
         }
         
         playSoundWith(fileName: fileName, fileExtension: "mp3")
+        
         
         randomPlacement1()
         randomPlacement2()
@@ -102,6 +104,8 @@ class GameVC: UIViewController {
                 
                 audioPlayer = try AVAudioPlayer.init(contentsOf: audioSourceURL)
                 audioPlayer.prepareToPlay()
+                 audioPlayer.play()
+                audioPlayer.currentTime += 4.0
                 
             }catch{
                 print(error)
@@ -138,7 +142,7 @@ class GameVC: UIViewController {
             highScore = score
             highScoreDefault.set(highScore, forKey: "highScore")
         }
-        audioPlayer.play()
+        //audioPlayer.play()
 //        timer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(pauseMusic), userInfo: nil, repeats: false)
         white1.center.y = white1.center.y + 167
         white2.center.y = white2.center.y + 167
